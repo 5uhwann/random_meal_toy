@@ -19,7 +19,7 @@ public class RandomMealServiceImpl implements RandomMealService{
     @Override
     public String selectMeal(Long id) {
         Member member = memberRepository.findById(id);
-        String selectedMeal = randomMealAlgo.selectRandomMeal(member);
+        String selectedMeal = randomMealAlgo.randomMealAlgo(member);
         return selectedMeal;
     }
 }

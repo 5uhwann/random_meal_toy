@@ -7,7 +7,7 @@ import toy.random_meal.member.Member;
 public class BasicRandomMealAlgo implements RandomMealAlgo{
 
     @Override
-    public String selectRandomMeal(Member member) {
+    public String randomMealAlgo(Member member) {
         String[] mealList = member.getBasicFood();
         int randomIndex = (int)((Math.random())*(mealList.length+1));
         return mealList[randomIndex];

@@ -1,13 +1,10 @@
-package toy.random_meal.memberService;
+package toy.random_meal.member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import toy.random_meal.AutoAppConfig;
-import toy.random_meal.member.Grade;
-import toy.random_meal.member.Member;
-import toy.random_meal.member.MemberService;
 
 public class MemberServiceTest {
 
