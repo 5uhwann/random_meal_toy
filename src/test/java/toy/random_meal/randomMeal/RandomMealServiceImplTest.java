@@ -9,6 +9,9 @@ import toy.random_meal.member.Grade;
 import toy.random_meal.member.Member;
 import toy.random_meal.member.MemberService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RandomMealServiceImplTest {
@@ -24,7 +27,9 @@ class RandomMealServiceImplTest {
         Member member = new Member(1L, "member", Grade.Basic);
         memberService.join(member);
         String[] testFood = {"a", "a", "a", "a", "a", "a", "a", "a", "a" };
-        member.setBasicFood(testFood);
+        ArrayList<String> basicFoodList = new ArrayList<>(Arrays.asList(testFood));
+        member.setFoodList(basicFoodList);
+
 
         //when
         String selectedMeal = randomMealService.selectMeal(1L);

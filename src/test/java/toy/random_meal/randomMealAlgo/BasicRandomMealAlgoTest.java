@@ -8,6 +8,8 @@ import toy.random_meal.member.Member;
 import toy.random_meal.ramdomMealAlgo.BasicRandomMealAlgo;
 import toy.random_meal.ramdomMealAlgo.RandomMealAlgo;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class BasicRandomMealAlgoTest {
@@ -17,12 +19,12 @@ public class BasicRandomMealAlgoTest {
     void basicAlgoTest() {
         //given
         Member member = new Member(1L, "member", Grade.Basic);
-        String[] mealList = member.getBasicFood();
+        ArrayList<String> mealList = member.getFoodList();
         //when
-        int randomIndex = (int)((Math.random())*(mealList.length+1));
+        int randomIndex = (int)((Math.random())*(mealList.size()+1));
 
         //then
         assertThat(randomIndex).isGreaterThanOrEqualTo(0);
-        assertThat(randomIndex).isLessThanOrEqualTo(mealList.length);
+        assertThat(randomIndex).isLessThanOrEqualTo(mealList.size());
     }
 }
