@@ -11,6 +11,7 @@ import toy.random_meal.member.MemberService;
 
 import java.util.ArrayList;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManageMealServiceImplTest {
@@ -31,7 +32,7 @@ class ManageMealServiceImplTest {
         // then
         ArrayList<String> foodList = member.getFoodList();
         String addedMeal = foodList.get(foodList.size() - 1);
-        Assertions.assertThat(addedMeal).isEqualTo("국밥");
+        assertThat(addedMeal).isEqualTo("국밥");
     }
 
     @Test
@@ -50,6 +51,26 @@ class ManageMealServiceImplTest {
 
         // then
         int addedFoodListSize = member.getFoodList().size();
-        Assertions.assertThat(addedFoodListSize).isEqualTo(foodListSize);
+        assertThat(addedFoodListSize).isEqualTo(foodListSize);
+    }
+
+    @Test
+    @DisplayName("프로 회원은 음식목록 삭제 가능")
+    void proMemberDeleteMeal() {
+        // given
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
+        MemberService memberService = ac.getBean(MemberService.class);
+        Member member = new Member(1L, "member", Grade.Pro);
+        memberService.join(member);
+        int beforeFoodListSize = member.getFoodList().size();
+        String meal = member.getFoodList().get(7);
+
+        // when
+        String deletedMeal = manageMealService.deleteMeal(member, "닭가슴살");
+
+        // then
+        assertThat(member.getFoodList().size()).isEqualTo(beforeFoodListSize-1);
+        assertThat(deletedMeal).isEqualTo(meal);
     }
 }

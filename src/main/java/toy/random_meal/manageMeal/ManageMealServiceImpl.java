@@ -34,6 +34,19 @@ public class ManageMealServiceImpl implements ManageMealService{
 
     @Override
     public String deleteMeal(Member member, String deleteMeal) {
-        return null;
+        Member findMember = memberRepository.findById(member.getId());
+        if(findMember.getGrade() == Grade.Pro){
+            ArrayList<String> foodList = findMember.getFoodList();
+            if(foodList.contains(deleteMeal)){
+                foodList.remove(deleteMeal);
+                return deleteMeal;
+            }else{
+                System.out.println("해당 음식이 존재하지 않음");
+                return null;
+            }
+        }else{
+            System.out.println("프로만 이용가능");
+            return null;
+        }
     }
 }
