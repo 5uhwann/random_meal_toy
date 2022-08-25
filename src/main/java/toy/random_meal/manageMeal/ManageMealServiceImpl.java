@@ -21,13 +21,12 @@ public class ManageMealServiceImpl implements ManageMealService{
     @Override
     public void addMeal(Member member, String newMeal) {
         Member findMember = memberRepository.findById(member.getId());
-        if (findMember.getGrade() == Grade.Pro) {
+        if (isMemberPro(findMember)) {
             ArrayList<String> foodList = findMember.getFoodList();
             foodList.add(newMeal);
             findMember.setFoodList(foodList);
         }else{
             System.out.println("프로만 이용가능");
-            return;
         }
 
     }
@@ -35,7 +34,7 @@ public class ManageMealServiceImpl implements ManageMealService{
     @Override
     public String deleteMeal(Member member, String deleteMeal) {
         Member findMember = memberRepository.findById(member.getId());
-        if(findMember.getGrade() == Grade.Pro){
+        if(isMemberPro(findMember)){
             ArrayList<String> foodList = findMember.getFoodList();
             if(foodList.contains(deleteMeal)){
                 foodList.remove(deleteMeal);
@@ -48,5 +47,9 @@ public class ManageMealServiceImpl implements ManageMealService{
             System.out.println("프로만 이용가능");
             return null;
         }
+    }
+
+    private static boolean isMemberPro(Member findMember) {
+        return findMember.getGrade() == Grade.Pro;
     }
 }

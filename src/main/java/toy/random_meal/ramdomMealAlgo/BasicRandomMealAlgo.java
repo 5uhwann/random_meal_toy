@@ -11,7 +11,12 @@ public class BasicRandomMealAlgo implements RandomMealAlgo{
     @Override
     public String randomMealAlgo(Member member) {
         ArrayList<String> basicFoodList = member.getFoodList();
-        int randomIndex = (int)((Math.random())*(basicFoodList.size()+1));
+        int randomIndex = getRandomIndex(basicFoodList);
         return basicFoodList.get(randomIndex);
+    }
+
+    private static int getRandomIndex(ArrayList<String> basicFoodList) {
+        int randomIndex = (int)((Math.random())*(basicFoodList.size()+1));
+        return randomIndex;
     }
 }
