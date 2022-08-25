@@ -23,8 +23,12 @@ public class ManageMealServiceImpl implements ManageMealService{
         Member findMember = memberRepository.findById(member.getId());
         if (isMemberPro(findMember)) {
             ArrayList<String> foodList = findMember.getFoodList();
-            foodList.add(newMeal);
-            findMember.setFoodList(foodList);
+            if (isMealContains(newMeal, foodList)) {
+                System.out.println("이미 존재하는 음식");
+            } else{
+                foodList.add(newMeal);
+                findMember.setFoodList(foodList);
+            }
         }else{
             System.out.println("프로만 이용가능");
         }
@@ -36,7 +40,7 @@ public class ManageMealServiceImpl implements ManageMealService{
         Member findMember = memberRepository.findById(member.getId());
         if(isMemberPro(findMember)){
             ArrayList<String> foodList = findMember.getFoodList();
-            if(foodList.contains(deleteMeal)){
+            if(isMealContains(deleteMeal, foodList)){
                 foodList.remove(deleteMeal);
                 return deleteMeal;
             }else{
@@ -51,5 +55,9 @@ public class ManageMealServiceImpl implements ManageMealService{
 
     private static boolean isMemberPro(Member findMember) {
         return findMember.getGrade() == Grade.Pro;
+    }
+
+    private static boolean isMealContains(String meal, ArrayList<String> foodList) {
+        return foodList.contains(meal);
     }
 }

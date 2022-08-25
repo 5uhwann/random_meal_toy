@@ -36,6 +36,24 @@ class ManageMealServiceImplTest {
     }
 
     @Test
+    @DisplayName("이미 존재하는 음식은 추가 불가")
+    void addDuplicateMeal() {
+        //given
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
+        MemberService memberService = ac.getBean(MemberService.class);
+        Member member = new Member(1L, "member", Grade.Pro);
+        memberService.join(member);
+
+        int beforeFoodListSize = member.getFoodList().size();
+        //when
+        manageMealService.addMeal(member, "돈까스");
+
+        //then
+        assertThat(member.getFoodList().size()).isEqualTo(beforeFoodListSize);
+    }
+
+    @Test
     @DisplayName("기본 회원은 음식목록 추가 기능 사용 불가")
     void basicMemberAddMealTest() {
         // given
@@ -70,7 +88,24 @@ class ManageMealServiceImplTest {
         String deletedMeal = manageMealService.deleteMeal(member, "닭가슴살");
 
         // then
-        assertThat(member.getFoodList().size()).isEqualTo(beforeFoodListSize-1);
+        assertThat(member.getFoodList().size()).isEqualTo(beforeFoodListSize - 1);
         assertThat(deletedMeal).isEqualTo(meal);
+    }
+
+    @Test
+    @DisplayName("음식 목록에 존재하지 않는 음식은 삭제 불가")
+    void deleteNonExistentFood() {
+        // given
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
+        MemberService memberService = ac.getBean(MemberService.class);
+        Member member = new Member(1L, "member", Grade.Basic);
+        memberService.join(member);
+
+        // when
+        String deletedMeal = manageMealService.deleteMeal(member, "케익");
+
+        // then
+        assertThat(deletedMeal).isEqualTo(null);
     }
 }
