@@ -1,10 +1,10 @@
-package toy.random_meal.manageMeal;
+package toy.random_meal.domain.mealdomain.manageMeal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import toy.random_meal.member.Grade;
-import toy.random_meal.member.Member;
-import toy.random_meal.member.MemberRepository;
+import toy.random_meal.domain.memberdomain.member.Grade;
+import toy.random_meal.domain.memberdomain.member.Member;
+import toy.random_meal.domain.memberdomain.member.MemberRepository;
 
 import java.util.ArrayList;
 

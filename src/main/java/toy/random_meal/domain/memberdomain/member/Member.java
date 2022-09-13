@@ -1,4 +1,4 @@
-package toy.random_meal.member;
+package toy.random_meal.domain.memberdomain.member;
 
 import java.util.ArrayList;
 import java.util.Arrays;

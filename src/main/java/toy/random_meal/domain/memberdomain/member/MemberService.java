@@ -1,4 +1,4 @@
-package toy.random_meal.member;
+package toy.random_meal.domain.memberdomain.member;
 
 public interface MemberService {
 

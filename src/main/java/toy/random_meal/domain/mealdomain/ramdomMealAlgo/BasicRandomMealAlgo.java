@@ -1,7 +1,7 @@
-package toy.random_meal.ramdomMealAlgo;
+package toy.random_meal.domain.mealdomain.ramdomMealAlgo;
 
 import org.springframework.stereotype.Component;
-import toy.random_meal.member.Member;
+import toy.random_meal.domain.memberdomain.member.Member;
 
 import java.util.ArrayList;
 

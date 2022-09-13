@@ -1,9 +1,9 @@
-package toy.random_meal.randomMeal;
+package toy.random_meal.domain.mealdomain.randomMeal;
 
 import org.springframework.stereotype.Component;
-import toy.random_meal.member.Member;
-import toy.random_meal.member.MemberRepository;
-import toy.random_meal.ramdomMealAlgo.RandomMealAlgo;
+import toy.random_meal.domain.memberdomain.member.Member;
+import toy.random_meal.domain.memberdomain.member.MemberRepository;
+import toy.random_meal.domain.mealdomain.ramdomMealAlgo.RandomMealAlgo;
 
 @Component
 public class RandomMealServiceImpl implements RandomMealService{

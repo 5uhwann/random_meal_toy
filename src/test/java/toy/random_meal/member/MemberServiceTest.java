@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import toy.random_meal.AutoAppConfig;
+import toy.random_meal.domain.memberdomain.member.Grade;
+import toy.random_meal.domain.memberdomain.member.Member;
+import toy.random_meal.domain.memberdomain.member.MemberService;
 
 public class MemberServiceTest {
 

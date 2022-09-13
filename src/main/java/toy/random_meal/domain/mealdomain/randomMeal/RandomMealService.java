@@ -1,4 +1,4 @@
-package toy.random_meal.randomMeal;
+package toy.random_meal.domain.mealdomain.randomMeal;
 
 public interface RandomMealService {
 

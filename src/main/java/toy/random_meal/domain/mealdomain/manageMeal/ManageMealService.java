@@ -1,6 +1,6 @@
-package toy.random_meal.manageMeal;
+package toy.random_meal.domain.mealdomain.manageMeal;
 
-import toy.random_meal.member.Member;
+import toy.random_meal.domain.memberdomain.member.Member;
 
 public interface ManageMealService {
 

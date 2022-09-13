@@ -1,12 +1,9 @@
 package toy.random_meal.randomMealAlgo;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import toy.random_meal.member.Grade;
-import toy.random_meal.member.Member;
-import toy.random_meal.ramdomMealAlgo.BasicRandomMealAlgo;
-import toy.random_meal.ramdomMealAlgo.RandomMealAlgo;
+import toy.random_meal.domain.memberdomain.member.Grade;
+import toy.random_meal.domain.memberdomain.member.Member;
 
 import java.util.ArrayList;
 
