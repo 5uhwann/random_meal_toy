@@ -1,4 +1,4 @@
-package toy.random_meal.randomMealAlgo;
+package toy.random_meal.domain.mealdomain.randomMealAlgo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

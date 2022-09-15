@@ -1,4 +1,4 @@
-package toy.random_meal.randomMeal;
+package toy.random_meal.domain.mealdomain.randomMeal;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
