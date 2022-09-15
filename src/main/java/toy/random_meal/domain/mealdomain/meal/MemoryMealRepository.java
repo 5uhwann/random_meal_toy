@@ -1,11 +1,14 @@
 package toy.random_meal.domain.mealdomain.meal;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class MemoryMealRepository implements MealRepository{
 
     private static final Map<Long, Meal> mealStore = new ConcurrentHashMap<>();
@@ -32,8 +35,8 @@ public class MemoryMealRepository implements MealRepository{
     public void update(Long mealId, Meal updateParam) {
         Meal findMeal = mealStore.get(mealId);
         findMeal.setMealName(updateParam.getMealName());
-        findMeal.setPrice(updateParam.getKcal());
         findMeal.setPrice(updateParam.getPrice());
+        findMeal.setKcal(updateParam.getKcal());
     }
 
     @Override
