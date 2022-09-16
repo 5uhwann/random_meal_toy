@@ -1,25 +1,29 @@
 package toy.random_meal.domain.mealdomain.randomMeal;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import toy.random_meal.domain.mealdomain.meal.Meal;
+import toy.random_meal.domain.mealdomain.meal.MealRepository;
 import toy.random_meal.domain.memberdomain.member.Member;
 import toy.random_meal.domain.memberdomain.member.MemberRepository;
 import toy.random_meal.domain.mealdomain.ramdomMealAlgo.RandomMealAlgo;
 
-@Component
+import java.util.ArrayList;
+
+@Service
 public class RandomMealServiceImpl implements RandomMealService{
 
-    private final MemberRepository memberRepository;
+    private final MealRepository mealRepository;
     private final RandomMealAlgo randomMealAlgo;
 
-    public RandomMealServiceImpl(MemberRepository memberRepository, RandomMealAlgo randomMealAlgo) {
-        this.memberRepository = memberRepository;
+    public RandomMealServiceImpl(MealRepository mealRepository, RandomMealAlgo randomMealAlgo) {
+        this.mealRepository = mealRepository;
         this.randomMealAlgo = randomMealAlgo;
     }
 
     @Override
-    public String selectMeal(Long id) {
-        Member member = memberRepository.findById(id);
-        String selectedMeal = randomMealAlgo.randomMealAlgo(member);
+    public Meal selectMeal() {
+        ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
+        Meal selectedMeal = randomMealAlgo.randomMealAlgo(meals);
         return selectedMeal;
     }
 }
