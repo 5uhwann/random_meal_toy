@@ -1,6 +1,7 @@
 package toy.random_meal.domain.mealdomain.ramdomMealAlgo;
 
 import org.springframework.stereotype.Component;
+import toy.random_meal.domain.mealdomain.meal.Meal;
 import toy.random_meal.domain.memberdomain.member.Member;
 
 import java.util.ArrayList;
@@ -9,13 +10,12 @@ import java.util.ArrayList;
 public class BasicRandomMealAlgo implements RandomMealAlgo{
 
     @Override
-    public String randomMealAlgo(Member member) {
-        ArrayList<String> basicFoodList = member.getFoodList();
-        int randomIndex = getRandomIndex(basicFoodList);
-        return basicFoodList.get(randomIndex);
+    public Meal randomMealAlgo(ArrayList<Meal> meals) {
+        int randomIndex = getRandomIndex(meals);
+        return meals.get(randomIndex);
     }
 
-    private static int getRandomIndex(ArrayList<String> basicFoodList) {
+    private static int getRandomIndex(ArrayList<Meal> basicFoodList) {
         int randomIndex = (int)((Math.random())*(basicFoodList.size()+1));
         return randomIndex;
     }

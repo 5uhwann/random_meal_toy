@@ -1,7 +1,9 @@
 package toy.random_meal.domain.mealdomain.ramdomMealAlgo;
 
-import toy.random_meal.domain.memberdomain.member.Member;
+import toy.random_meal.domain.mealdomain.meal.Meal;
+
+import java.util.ArrayList;
 
 public interface RandomMealAlgo {
-    String randomMealAlgo(Member member);
+    Meal randomMealAlgo(ArrayList<Meal> meals);
 }
