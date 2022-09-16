@@ -8,4 +8,6 @@ public interface ManageMealService {
     Meal addMeal(Meal meal);
 
     void deleteMeal(Long id);
+
+    void editMeal(Long id, Meal updateParam);
 }

@@ -31,7 +31,10 @@ public class ManageMealServiceImpl implements ManageMealService{
         mealRepository.delete(id);
     }
 
-
+    @Override
+    public void editMeal(Long id, Meal updateParam) {
+        mealRepository.update(id, updateParam);
+    }
 
 //    private static boolean isMemberPro(Member findMember) {
 //        return findMember.getGrade() == Grade.Pro;
