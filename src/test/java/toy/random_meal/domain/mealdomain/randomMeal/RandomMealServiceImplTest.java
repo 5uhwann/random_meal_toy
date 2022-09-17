@@ -1,39 +1,40 @@
 package toy.random_meal.domain.mealdomain.randomMeal;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import toy.random_meal.AutoAppConfig;
-import toy.random_meal.domain.mealdomain.randomMeal.RandomMealService;
-import toy.random_meal.domain.memberdomain.member.Grade;
-import toy.random_meal.domain.memberdomain.member.Member;
-import toy.random_meal.domain.memberdomain.member.MemberService;
+import toy.random_meal.domain.mealdomain.meal.Meal;
+import toy.random_meal.domain.mealdomain.meal.MealRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class RandomMealServiceImplTest {
 
     @Test
-    @DisplayName("randomMealAlgo()에서 선택된 음식은 기본음식목록 중 하나다.")
     void selectMealTest() {
         //given
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        MealRepository mealRepository = ac.getBean(MealRepository.class);
         RandomMealService randomMealService = ac.getBean(RandomMealService.class);
-        MemberService memberService = ac.getBean(MemberService.class);
 
-        Member member = new Member(1L, "member", Grade.Basic);
-        memberService.join(member);
-        String[] testFood = {"a", "a", "a", "a", "a", "a", "a", "a", "a" };
-        ArrayList<String> basicFoodList = new ArrayList<>(Arrays.asList(testFood));
-        member.setFoodList(basicFoodList);
+        Meal mealA = new Meal("A", 10000, 500);
+        Meal mealB = new Meal("B", 11000, 600);
+        Meal mealC = new Meal("C", 12000, 700);
+        Meal mealD = new Meal("D", 13000, 800);
+        Meal mealE = new Meal("E", 14000, 900);
 
+        mealRepository.save(mealA);
+        mealRepository.save(mealB);
+        mealRepository.save(mealC);
+        mealRepository.save(mealD);
+        mealRepository.save(mealE);
 
         //when
-        String selectedMeal = randomMealService.selectMeal(1L);
+        Meal selectedMeal = randomMealService.selectMeal();
 
         //then
-        Assertions.assertThat(selectedMeal).isEqualTo("a");
+        ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
+        Assertions.assertThat(meals).contains(selectedMeal);
     }
 }
