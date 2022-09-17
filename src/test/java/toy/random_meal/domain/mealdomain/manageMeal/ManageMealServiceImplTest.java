@@ -1,13 +1,12 @@
 package toy.random_meal.domain.mealdomain.manageMeal;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import toy.random_meal.AutoAppConfig;
-import toy.random_meal.domain.mealdomain.manageMeal.ManageMealService;
-import toy.random_meal.domain.memberdomain.member.Grade;
-import toy.random_meal.domain.memberdomain.member.Member;
-import toy.random_meal.domain.memberdomain.member.MemberService;
+import toy.random_meal.domain.mealdomain.meal.Meal;
+import toy.random_meal.domain.mealdomain.meal.MemoryMealRepository;
 
 import java.util.ArrayList;
 
@@ -15,96 +14,68 @@ import static org.assertj.core.api.Assertions.*;
 
 class ManageMealServiceImplTest {
 
-    @Test
-    @DisplayName("프로 회원은 음식목록 추가 가능")
-    void proMemberAddMealTest() {
-        // given
+    ManageMealService manageMealService;
+    MemoryMealRepository mealRepository = new MemoryMealRepository();
+
+    @BeforeEach
+    void beforeEach() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
-        MemberService memberService = ac.getBean(MemberService.class);
-        Member member = new Member(1L, "member", Grade.Pro);
-        memberService.join(member);
+        manageMealService = ac.getBean(ManageMealService.class);
+    }
 
-        // when
-        manageMealService.addMeal(member, "국밥");
-
-        // then
-        ArrayList<String> foodList = member.getFoodList();
-        String addedMeal = foodList.get(foodList.size() - 1);
-        assertThat(addedMeal).isEqualTo("국밥");
+    @AfterEach
+    void afterEach() {
+        mealRepository.clear();
     }
 
     @Test
-    @DisplayName("이미 존재하는 음식은 추가 불가")
-    void addDuplicateMeal() {
-        //given
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
-        MemberService memberService = ac.getBean(MemberService.class);
-        Member member = new Member(1L, "member", Grade.Pro);
-        memberService.join(member);
+    void addMealTest() {
+        // given
+        Meal newMeal = new Meal("돈까스", 10000, 600);
 
-        int beforeFoodListSize = member.getFoodList().size();
+        // when
+        manageMealService.addMeal(newMeal);
+
+        // then
+        Meal findMeal = mealRepository.findById(newMeal.getId());
+        assertThat(newMeal).isEqualTo(findMeal);
+    }
+
+    @Test
+    void deleteMealTest() {
+        //given
+        Meal meal1 = new Meal("돈까스", 10000, 600);
+        Meal meal2 = new Meal("칼국수", 8000, 550);
+
+        manageMealService.addMeal(meal1);
+        manageMealService.addMeal(meal2);
+
         //when
-        manageMealService.addMeal(member, "돈까스");
+        manageMealService.deleteMeal(meal2.getId());
 
         //then
-        assertThat(member.getFoodList().size()).isEqualTo(beforeFoodListSize);
+        ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
+        assertThat(meals.size()).isEqualTo(1);
+        assertThat(meals).doesNotContain(meal2);
     }
 
     @Test
-    @DisplayName("기본 회원은 음식목록 추가 기능 사용 불가")
-    void basicMemberAddMealTest() {
-        // given
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
-        MemberService memberService = ac.getBean(MemberService.class);
-        Member member = new Member(1L, "member", Grade.Basic);
-        memberService.join(member);
-        int foodListSize = member.getFoodList().size();
+    void editMeal() {
+        //given
+        Meal meal1 = new Meal("돈까스", 10000, 600);
+        Meal meal2 = new Meal("칼국수", 8000, 550);
 
-        // when
-        manageMealService.addMeal(member, "국밥");
+        manageMealService.addMeal(meal1);
+        manageMealService.addMeal(meal2);
 
-        // then
-        int addedFoodListSize = member.getFoodList().size();
-        assertThat(addedFoodListSize).isEqualTo(foodListSize);
-    }
+        Meal updateParam = new Meal("치즈 돈까스", 15000, 700);
 
-    @Test
-    @DisplayName("프로 회원은 음식목록 삭제 가능")
-    void proMemberDeleteMeal() {
-        // given
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
-        MemberService memberService = ac.getBean(MemberService.class);
-        Member member = new Member(1L, "member", Grade.Pro);
-        memberService.join(member);
-        int beforeFoodListSize = member.getFoodList().size();
-        String meal = member.getFoodList().get(7);
+        //when
+        manageMealService.editMeal(meal1.getId(), updateParam);
 
-        // when
-        String deletedMeal = manageMealService.deleteMeal(member, "닭가슴살");
-
-        // then
-        assertThat(member.getFoodList().size()).isEqualTo(beforeFoodListSize - 1);
-        assertThat(deletedMeal).isEqualTo(meal);
-    }
-
-    @Test
-    @DisplayName("음식 목록에 존재하지 않는 음식은 삭제 불가")
-    void deleteNonExistentFood() {
-        // given
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        ManageMealService manageMealService = ac.getBean(ManageMealService.class);
-        MemberService memberService = ac.getBean(MemberService.class);
-        Member member = new Member(1L, "member", Grade.Basic);
-        memberService.join(member);
-
-        // when
-        String deletedMeal = manageMealService.deleteMeal(member, "케익");
-
-        // then
-        assertThat(deletedMeal).isEqualTo(null);
+        //then
+        assertThat(meal1.getMealName()).isEqualTo(updateParam.getMealName());
+        assertThat(meal1.getPrice()).isEqualTo(updateParam.getPrice());
+        assertThat(meal1.getKcal()).isEqualTo(updateParam.getKcal());
     }
 }
