@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>음식 상세</h2>
+    </div>
+
+    <div>
+        <label for="mealName">음식 명</label>
+        <input type="text" id="mealName" name="mealName" class="form-control" value="음식 A" th:value="${meal.mealName}" readonly>
+    </div>
+
+    <div>
+        <label for="price">가격</label>
+        <input type="text" id="price" name="price" class="form-control" value="10000" th:value="${meal.price}" readonly>
+    </div>
+
+    <div>
+        <label for="kcal">칼로리</label>
+        <input type="text" id="kcal" name="kcal" class="form-control" value="550" th:value="${meal.kcal}" readonly>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{/meal/{mealId}/edit(mealId=${meal.id})}'|"
+                    type="button">음식 수정</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='meals.html'"
+                    th:onclick="|location.href='@{/meal/meals}'|"
+                    type="button">목록으로</button>
+        </div>
+    </div>
+</div>
+<!-- /container -->
+</body>
+</html>
