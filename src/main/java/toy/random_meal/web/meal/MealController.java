@@ -54,6 +54,12 @@ public class MealController {
         return "redirect:/meal/meals";
     }
 
+    @PostMapping("{mealId}/edit/delete")
+    public String delete(@PathVariable Long mealId) {
+        manageMealService.deleteMeal(mealId);
+        return "redirect:/meal/meals";
+    }
+
     @PostMapping("/select")
     public String select(Model model) {
         Meal selectedMeal = randomMealService.selectMeal();
