@@ -31,4 +31,9 @@ public class MealController {
         model.addAttribute("meal", meal);
         return "/meal/meal";
     }
+
+    @GetMapping("/add")
+    public String addForm() {
+        return "/meal/addForm";
+    }
 }
