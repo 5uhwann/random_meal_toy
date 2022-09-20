@@ -3,10 +3,8 @@ package toy.random_meal.web.meal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import toy.random_meal.domain.mealdomain.manageMeal.ManageMealService;
 import toy.random_meal.domain.mealdomain.meal.Meal;
 import toy.random_meal.domain.mealdomain.meal.MealRepository;
 import toy.random_meal.domain.mealdomain.randomMeal.RandomMealService;
@@ -21,6 +19,7 @@ public class MealController {
 
     private final MealRepository mealRepository;
     private final RandomMealService randomMealService;
+    private final ManageMealService manageMealService;
 
     @GetMapping("/meals")
     public String meals(Model model) {
@@ -41,6 +40,12 @@ public class MealController {
         Meal meal = mealRepository.findById(mealId);
         model.addAttribute("meal", meal);
         return "/meal/editForm";
+    }
+
+    @PostMapping("/{mealId}/edit")
+    public String edit(@PathVariable Long mealId, @ModelAttribute Meal updateParam) {
+        manageMealService.editMeal(mealId, updateParam);
+        return "redirect:/meal/meals";
     }
 
     @GetMapping("/add")
