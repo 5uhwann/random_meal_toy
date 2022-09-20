@@ -36,4 +36,12 @@ public class MealController {
     public String addForm() {
         return "/meal/addForm";
     }
+
+    @GetMapping("/{mealId}/edit")
+    public String editForm(@PathVariable long mealId, Model model) {
+        Meal meal = mealRepository.findById(mealId);
+        model.addAttribute("meal", meal);
+        return "/meal/editForm";
+    }
+
 }
