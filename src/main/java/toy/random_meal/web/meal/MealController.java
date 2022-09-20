@@ -12,6 +12,7 @@ import toy.random_meal.domain.mealdomain.meal.MealRepository;
 import toy.random_meal.domain.mealdomain.randomMeal.RandomMealService;
 import toy.random_meal.domain.mealdomain.randomMeal.RandomMealServiceImpl;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Controller
@@ -55,4 +56,12 @@ public class MealController {
         return "redirect:/meal/randomMeal";
     }
 
+    @PostConstruct
+    public void init() {
+        mealRepository.save(new Meal("돈까스", 10000, 500));
+        mealRepository.save(new Meal("파스타", 11000, 450));
+        mealRepository.save(new Meal("국밥", 8000, 600));
+        mealRepository.save(new Meal("삼겸살", 20000, 800));
+        mealRepository.save(new Meal("집밥", 4000, 500));
+    }
 }
