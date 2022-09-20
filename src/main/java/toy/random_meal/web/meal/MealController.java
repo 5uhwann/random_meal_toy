@@ -5,10 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import toy.random_meal.domain.mealdomain.meal.Meal;
 import toy.random_meal.domain.mealdomain.meal.MealRepository;
+import toy.random_meal.domain.mealdomain.randomMeal.RandomMealService;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Controller
@@ -17,6 +20,7 @@ import java.util.List;
 public class MealController {
 
     private final MealRepository mealRepository;
+    private final RandomMealService randomMealService;
 
     @GetMapping("/meals")
     public String meals(Model model) {
@@ -30,6 +34,13 @@ public class MealController {
         Meal meal = mealRepository.findById(mealId);
         model.addAttribute("meal", meal);
         return "/meal/meal";
+    }
+
+    @GetMapping("/{mealId}/edit")
+    public String editForm(@PathVariable long mealId, Model model) {
+        Meal meal = mealRepository.findById(mealId);
+        model.addAttribute("meal", meal);
+        return "/meal/editForm";
     }
 
     @GetMapping("/add")
