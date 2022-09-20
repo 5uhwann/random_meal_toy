@@ -48,7 +48,7 @@ public class MealController {
         return "/meal/addForm";
     }
 
-    @PostMapping("/select")
+    @PostMapping("/meals")
     public String select(Model model) {
         Meal selectedMeal = randomMealService.selectMeal();
         model.addAttribute("selectedMeal", selectedMeal);
