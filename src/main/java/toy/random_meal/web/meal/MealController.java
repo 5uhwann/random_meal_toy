@@ -60,11 +60,17 @@ public class MealController {
         return "redirect:/meal/meals";
     }
 
+  @GetMapping("/select")
+  public String randomMeal(Model model) {
+      Meal selectedMeal = mealRepository.getRandomMeal();
+      model.addAttribute("selectedMeal", selectedMeal);
+      return "/meal/randomMeal";
+  }
+
     @PostMapping("/select")
     public String select(Model model) {
-        Meal selectedMeal = randomMealService.selectMeal();
-        model.addAttribute("selectedMeal", selectedMeal);
-        return "redirect:/meal/randomMeal";
+        randomMealService.selectMeal();
+        return "redirect:/meal/select";
     }
 
     @PostConstruct
