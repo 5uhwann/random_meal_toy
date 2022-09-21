@@ -31,10 +31,11 @@ class RandomMealServiceImplTest {
         mealRepository.save(mealE);
 
         //when
-        Meal selectedMeal = randomMealService.selectMeal();
+        randomMealService.selectMeal();
 
         //then
         ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
-        Assertions.assertThat(meals).contains(selectedMeal);
+        Meal randomMeal = mealRepository.getRandomMeal();
+        Assertions.assertThat(meals).contains(randomMeal);
     }
 }
