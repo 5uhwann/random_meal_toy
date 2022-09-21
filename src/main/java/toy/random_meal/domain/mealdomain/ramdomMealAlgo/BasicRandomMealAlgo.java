@@ -16,7 +16,7 @@ public class BasicRandomMealAlgo implements RandomMealAlgo{
     }
 
     private static int getRandomIndex(ArrayList<Meal> basicFoodList) {
-        int randomIndex = (int)((Math.random())*(basicFoodList.size()+1));
+        int randomIndex = (int)((Math.random())*(basicFoodList.size()));
         return randomIndex;
     }
 }
