@@ -41,6 +41,12 @@ public class MealController {
         return "/meal/addForm";
     }
 
+    @PostMapping("/add")
+    public String add(@ModelAttribute Meal meal) {
+        manageMealService.addMeal(meal);
+        return "redirect:/meal/meals";
+    }
+
     @GetMapping("/{mealId}/edit")
     public String editForm(@PathVariable long mealId, Model model) {
         Meal meal = mealRepository.findById(mealId);
