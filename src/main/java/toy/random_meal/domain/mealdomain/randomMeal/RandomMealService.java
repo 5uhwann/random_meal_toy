@@ -4,5 +4,5 @@ import toy.random_meal.domain.mealdomain.meal.Meal;
 
 public interface RandomMealService {
 
-    Meal selectMeal();
+    void selectMeal();
 }

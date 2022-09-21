@@ -21,9 +21,9 @@ public class RandomMealServiceImpl implements RandomMealService{
     }
 
     @Override
-    public Meal selectMeal() {
+    public void selectMeal() {
         ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
         Meal selectedMeal = randomMealAlgo.randomMealAlgo(meals);
-        return selectedMeal;
+        mealRepository.setRandomMeal(selectedMeal);
     }
 }
