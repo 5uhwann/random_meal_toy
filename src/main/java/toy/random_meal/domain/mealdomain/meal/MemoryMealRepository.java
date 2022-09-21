@@ -12,8 +12,9 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MemoryMealRepository implements MealRepository{
 
     private static final Map<Long, Meal> mealStore = new ConcurrentHashMap<>();
-    private static final Map<Long, Meal> selectedMealStore = new ConcurrentHashMap<>();
     private static AtomicLong sequence = new AtomicLong();
+
+    private Meal selectedMeal;
 
     @Override
     public Meal save(Meal meal) {
@@ -46,14 +47,13 @@ public class MemoryMealRepository implements MealRepository{
     }
 
     @Override
-    public Meal randomMealSave(Meal meal) {
-        selectedMealStore.put(meal.getId(), meal);
-        return meal;
+    public void setRandomMeal(Meal meal) {
+        selectedMeal = meal;
     }
 
     @Override
-    public Meal findRandomMealById(Long id) {
-        return selectedMealStore.get(id);
+    public Meal getRandomMeal() {
+        return selectedMeal;
     }
 
     public void clear() {
