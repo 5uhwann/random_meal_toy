@@ -14,5 +14,9 @@ public interface MealRepository {
 
     void delete(Long id);
 
+    Meal randomMealSave(Meal meal);
+
+    Meal findRandomMealById(Long id);
+
 
 }
