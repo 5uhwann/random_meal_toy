@@ -13,9 +13,10 @@ public class MemoryMealRepository implements MealRepository{
 
     private static final Map<Long, Meal> mealStore = new ConcurrentHashMap<>();
     private static AtomicLong sequence = new AtomicLong();
+    private static final ArrayList<Meal> selectedMealList = new ArrayList<>();
 
-    private Meal selectedMeal;
-
+    private static int RANDOM_MEAL_INDEX = 0;
+    // private static final Q
     @Override
     public Meal save(Meal meal) {
         meal.setId(sequence.incrementAndGet());
@@ -47,13 +48,19 @@ public class MemoryMealRepository implements MealRepository{
     }
 
     @Override
-    public void setRandomMeal(Meal meal) {
-        selectedMeal = meal;
+    public Meal saveSelectedMeal(Meal meal) {
+        selectedMealList.add(meal);
+        return meal;
     }
 
     @Override
-    public Meal getRandomMeal() {
-        return selectedMeal;
+    public Meal getSelectedMeal(){
+      Meal meal = selectedMealList.get(RANDOM_MEAL_INDEX);
+      return meal;
+    }
+
+    public void clearSelectedMeal(){
+      selectedMealList.clear();
     }
 
     public void clear() {

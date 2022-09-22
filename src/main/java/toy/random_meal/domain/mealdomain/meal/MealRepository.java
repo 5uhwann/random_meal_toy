@@ -14,9 +14,8 @@ public interface MealRepository {
 
     void delete(Long id);
 
-    void setRandomMeal(Meal meal);
+    Meal saveSelectedMeal(Meal meal);
 
-    Meal getRandomMeal();
-
+    Meal getSelectedMeal();
 
 }
