@@ -1,21 +1,28 @@
 package toy.random_meal.domain.mealdomain.randomMeal;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import toy.random_meal.AutoAppConfig;
 import toy.random_meal.domain.mealdomain.meal.Meal;
-import toy.random_meal.domain.mealdomain.meal.MealRepository;
+import toy.random_meal.domain.mealdomain.meal.MemoryMealRepository;
 
 import java.util.ArrayList;
 
 class RandomMealServiceImplTest {
 
+    MemoryMealRepository mealRepository = new MemoryMealRepository();
+
+    @AfterEach
+    void afterEach(){
+      mealRepository.clearSelectedMeal();
+    }
+
     @Test
     void selectMealTest() {
         //given
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        MealRepository mealRepository = ac.getBean(MealRepository.class);
         RandomMealService randomMealService = ac.getBean(RandomMealService.class);
 
         Meal mealA = new Meal("A", 10000, 500);
@@ -35,7 +42,7 @@ class RandomMealServiceImplTest {
 
         //then
         ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
-        Meal randomMeal = mealRepository.getRandomMeal();
+        Meal randomMeal = mealRepository.getSelectedMeal();
         Assertions.assertThat(meals).contains(randomMeal);
     }
 }
