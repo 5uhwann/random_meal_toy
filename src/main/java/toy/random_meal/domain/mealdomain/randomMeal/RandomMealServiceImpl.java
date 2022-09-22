@@ -24,6 +24,6 @@ public class RandomMealServiceImpl implements RandomMealService{
     public void selectMeal() {
         ArrayList<Meal> meals = new ArrayList<>(mealRepository.findAll());
         Meal selectedMeal = randomMealAlgo.randomMealAlgo(meals);
-        mealRepository.setRandomMeal(selectedMeal);
+        mealRepository.saveSelectedMeal(selectedMeal);
     }
 }

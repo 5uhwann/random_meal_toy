@@ -68,7 +68,7 @@ public class MealController {
 
   @GetMapping("/select")
   public String randomMeal(Model model) {
-      Meal selectedMeal = mealRepository.getRandomMeal();
+      Meal selectedMeal = mealRepository.getSelectedMeal();
       model.addAttribute("selectedMeal", selectedMeal);
       return "/meal/randomMeal";
   }
