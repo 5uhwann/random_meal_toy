@@ -14,11 +14,6 @@ class RandomMealServiceImplTest {
 
     MemoryMealRepository mealRepository = new MemoryMealRepository();
 
-    @AfterEach
-    void afterEach(){
-      mealRepository.clearSelectedMeal();
-    }
-
     @Test
     void selectMealTest() {
         //given
