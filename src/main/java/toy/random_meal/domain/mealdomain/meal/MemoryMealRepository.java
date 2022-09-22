@@ -56,10 +56,11 @@ public class MemoryMealRepository implements MealRepository{
     @Override
     public Meal getSelectedMeal(){
       Meal meal = selectedMealList.get(RANDOM_MEAL_INDEX);
+      clearSelectedMeal();
       return meal;
     }
 
-    public void clearSelectedMeal(){
+    private void clearSelectedMeal(){
       selectedMealList.clear();
     }
 
