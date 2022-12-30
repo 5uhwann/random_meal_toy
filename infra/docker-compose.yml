@@ -1,0 +1,22 @@
+version: '3.8'
+
+volumes:
+  data:
+    driver: local
+  config:
+    driver: local
+
+services:
+  db:
+    image: mysql:8.0.29
+    container_name: pickmeal-mysql
+    ports:
+      - "30666:3306"
+    volumes:
+      - data:/var/lib/mysql
+      - config:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: toy_pickmeal
+    platform: linux/x86_64
+    restart: always
