@@ -20,7 +20,7 @@ public class MemoryMealRepository implements MealRepository{
     // private static final Q
     @Override
     public Meal save(Meal meal) {
-        meal.setId(sequence.incrementAndGet());
+//        meal.setId(sequence.incrementAndGet());
         mealStore.put(meal.getId(), meal);
         return meal;
     }
@@ -38,9 +38,9 @@ public class MemoryMealRepository implements MealRepository{
     @Override
     public void update(Long mealId, Meal updateParam) {
         Meal findMeal = mealStore.get(mealId);
-        findMeal.setMealName(updateParam.getMealName());
-        findMeal.setPrice(updateParam.getPrice());
-        findMeal.setKcal(updateParam.getKcal());
+//        findMeal.setMealName(updateParam.getMealName());
+//        findMeal.setPrice(updateParam.getPrice());
+//        findMeal.setKcal(updateParam.getKcal());
     }
 
     @Override

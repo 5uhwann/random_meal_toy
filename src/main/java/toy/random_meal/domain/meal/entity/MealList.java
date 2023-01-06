@@ -1,0 +1,38 @@
+package toy.random_meal.domain.meal.entity;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import lombok.Getter;
+import toy.random_meal.domain.member.entity.Member;
+
+@Entity
+@Getter
+public class MealList {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "meal_list_id")
+    private Long id;
+
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    private String name;
+
+    @OneToMany(mappedBy = "mealList")
+    private List<ListMeal> listMeals = new ArrayList<>();
+
+    private int count; // 담긴 음식
+}

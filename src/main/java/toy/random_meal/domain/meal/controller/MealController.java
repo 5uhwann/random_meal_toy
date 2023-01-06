@@ -65,12 +65,12 @@ public class MealController {
         return "redirect:/meal/meals";
     }
 
-  @GetMapping("/select")
-  public String randomMeal(Model model) {
-      Meal selectedMeal = mealRepository.getSelectedMeal();
-      model.addAttribute("selectedMeal", selectedMeal);
-      return "/meal/randomMeal";
-  }
+    @GetMapping("/select")
+    public String randomMeal(Model model) {
+        Meal selectedMeal = mealRepository.getSelectedMeal();
+        model.addAttribute("selectedMeal", selectedMeal);
+        return "/meal/randomMeal";
+    }
 
     @PostMapping("/select")
     public String select(Model model) {
@@ -78,12 +78,4 @@ public class MealController {
         return "redirect:/meal/select";
     }
 
-    @PostConstruct
-    public void init() {
-        mealRepository.save(new Meal("돈까스", 10000, 500));
-        mealRepository.save(new Meal("파스타", 11000, 450));
-        mealRepository.save(new Meal("국밥", 8000, 600));
-        mealRepository.save(new Meal("삼겸살", 20000, 800));
-        mealRepository.save(new Meal("집밥", 4000, 500));
-    }
 }
