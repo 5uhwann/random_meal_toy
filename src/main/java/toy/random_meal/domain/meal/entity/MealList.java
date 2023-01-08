@@ -32,7 +32,7 @@ public class MealList {
     private String name;
 
     @OneToMany(mappedBy = "mealList")
-    private List<ListMeal> listMeals = new ArrayList<>();
+    private List<Meal> listMeals = new ArrayList<>();
 
     private int count; // 담긴 음식
 }

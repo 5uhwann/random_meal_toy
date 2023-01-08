@@ -24,6 +24,10 @@ public class Meal {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "meal_list_id")
+    private MealList mealList;
+
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
