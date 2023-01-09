@@ -1,6 +1,5 @@
 package toy.random_meal.domain.meal.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -12,18 +11,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Getter;
+import toy.random_meal.domain.common.BaseEntity;
 import toy.random_meal.domain.member.entity.Member;
 
 @Entity
 @Getter
-public class MealList {
+public class MealList extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "meal_list_id")
     private Long id;
-
-    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
