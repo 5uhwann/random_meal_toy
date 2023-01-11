@@ -15,7 +15,7 @@ public class MemberSelection extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "log_id")
+    @Column(name = "member_selection_id")
     private Long id;
 
     @ManyToOne
