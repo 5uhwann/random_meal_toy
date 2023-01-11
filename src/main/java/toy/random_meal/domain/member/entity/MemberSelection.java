@@ -1,6 +1,7 @@
 package toy.random_meal.domain.member.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +22,7 @@ public class MemberSelection extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne
-    @JoinColumn(name = "meal_id")
-    private Meal meal;
-
-
+    @Embedded
+    private SelectedMeal selectedMeal;
 
 }
