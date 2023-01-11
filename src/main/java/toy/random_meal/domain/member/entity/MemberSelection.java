@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
 import toy.random_meal.domain.common.BaseEntity;
 
 @Entity
+@Getter
 public class MemberSelection extends BaseEntity {
 
     @Id
