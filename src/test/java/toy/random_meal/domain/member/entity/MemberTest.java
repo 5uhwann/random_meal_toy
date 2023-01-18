@@ -13,7 +13,7 @@ class MemberTest {
         Grade grade = Grade.Basic;
 
         //when
-        Member createdMember = Member.createMember(memberName, grade);
+        Member createdMember = Member.of(memberName, grade);
 
         //then
         assertThat(createdMember.getName()).isEqualTo(memberName);

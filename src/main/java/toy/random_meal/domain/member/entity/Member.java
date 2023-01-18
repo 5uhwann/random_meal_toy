@@ -28,7 +28,7 @@ public class Member extends BaseEntity {
     private Grade grade;
 
     //==생성 메서드==//
-    public static Member createMember(String memberName, Grade grade) {
+    public static Member of(String memberName, Grade grade) {
         Member member = new Member();
         member.name = memberName;
         member.grade = grade;

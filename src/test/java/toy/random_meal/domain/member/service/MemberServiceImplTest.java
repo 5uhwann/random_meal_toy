@@ -22,7 +22,7 @@ class MemberServiceImplTest {
     @Test
     void 회원가입() {
         //given
-        Member member = Member.createMember("5uhwann", Grade.Basic);
+        Member member = Member.of("5uhwann", Grade.Basic);
 
         //when
         Long joinedMemberId = memberService.join(member);
@@ -35,8 +35,8 @@ class MemberServiceImplTest {
     @Test
     void 중복회원_가입() {
         //given
-        Member memberA = Member.createMember("5uhwann", Grade.Pro);
-        Member memberB = Member.createMember("5uhwann", Grade.Basic);
+        Member memberA = Member.of("5uhwann", Grade.Pro);
+        Member memberB = Member.of("5uhwann", Grade.Basic);
 
         memberService.join(memberA);
 
