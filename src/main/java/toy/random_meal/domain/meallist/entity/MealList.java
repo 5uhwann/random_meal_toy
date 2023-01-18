@@ -1,4 +1,4 @@
-package toy.random_meal.domain.meal.entity;
+package toy.random_meal.domain.meallist.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import toy.random_meal.domain.common.BaseEntity;
+import toy.random_meal.domain.meal.entity.Meal;
 import toy.random_meal.domain.member.entity.Member;
 
 @Entity
@@ -30,8 +31,8 @@ public class MealList extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "mealList")
-    private List<Meal> listMeals = new ArrayList<>();
+    @OneToMany(mappedBy = "meals")
+    private List<Meal> meals = new ArrayList<>();
 
     private int count; // 담긴 음식
 }
