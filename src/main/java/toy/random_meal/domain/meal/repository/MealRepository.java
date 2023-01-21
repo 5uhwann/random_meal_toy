@@ -11,12 +11,6 @@ public interface MealRepository {
 
     List<Meal> findAll();
 
-    void update(Long itemId, Meal updateParam);
-
     void delete(Long id);
-
-    Meal saveSelectedMeal(Meal meal);
-
-    Meal getSelectedMeal();
 
 }
