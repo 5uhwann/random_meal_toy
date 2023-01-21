@@ -8,11 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import toy.random_meal.domain.common.BaseEntity;
+import toy.random_meal.domain.meallist.entity.MealList;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Meal extends BaseEntity {
 
     @Id
@@ -33,4 +38,13 @@ public class Meal extends BaseEntity {
     private int price;
     private int kcal;
 
+    //==생성 메서드==//
+    @Builder
+    public  Meal (MealList meals, Category category, String name, int price, int kcal) {
+        this.meals = meals;
+        this.category = category;
+        this.name = name;
+        this.price = price;
+        this.kcal = kcal;
+    }
 }
