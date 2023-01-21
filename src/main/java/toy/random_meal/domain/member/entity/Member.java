@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import toy.random_meal.domain.common.BaseEntity;
@@ -28,10 +29,9 @@ public class Member extends BaseEntity {
     private Grade grade;
 
     //==생성 메서드==//
-    public static Member of(String memberName, Grade grade) {
-        Member member = new Member();
-        member.name = memberName;
-        member.grade = grade;
-        return member;
+    @Builder
+    public Member(String memberName, Grade grade) {
+        this.name = memberName;
+        this.grade = grade;
     }
 }
