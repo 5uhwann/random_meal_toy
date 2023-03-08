@@ -6,11 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import toy.random_meal.common.entity.BaseEntity;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
     @Id
@@ -26,5 +30,11 @@ public class Member extends BaseEntity {
 
     private String password;
 
+    @Builder
+    private Member(String name, UserId userId, String password) {
+        this.name = name;
+        this.userId = userId;
+        this.password = password;
+    }
 
 }
