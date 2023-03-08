@@ -21,12 +21,12 @@ public class UserId {
         this.userId = userId;
     }
 
-    public UserId of(String id) {
+    public static UserId of(String id) {
         validateId(id);
         return new UserId(id);
     }
 
-    private void validateId(String id) {
+    private static void validateId(String id) {
         Assert.notNull(id, "아이디는 필수입니다.");
         if (id.length() < MIN_LENGTH || id.length() > MAX_LENGTH) {
             throw new IllegalStateException("아이디는 6~20자 사이의 길이여야 합니다.");
