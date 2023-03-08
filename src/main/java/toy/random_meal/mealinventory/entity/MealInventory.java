@@ -9,11 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
+import toy.random_meal.common.entity.BaseEntity;
 import toy.random_meal.member.entity.Member;
 
 @Entity
 @Getter
-public class MealInventory {
+public class MealInventory extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
