@@ -3,6 +3,7 @@ package toy.random_meal.member.service;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import toy.random_meal.member.controller.dto.DuplicatedUserIdResponse;
 import toy.random_meal.member.entity.Member;
 import toy.random_meal.member.entity.UserId;
 import toy.random_meal.member.repository.MemberRepository;
@@ -14,11 +15,12 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
     @Override
-    public void checkDuplicatedUserId(UserId userId) {
+    public DuplicatedUserIdResponse checkDuplicatedUserId(UserId userId) {
         List<Member> findMember = memberRepository.findByUserId(userId);
         if (!findMember.isEmpty()) {
-            throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+            return new DuplicatedUserIdResponse(userId.getUserId(), false);
         }
+        return new DuplicatedUserIdResponse(userId.getUserId(), true);
     }
 
     @Override
