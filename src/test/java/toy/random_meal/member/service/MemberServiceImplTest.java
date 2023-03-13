@@ -6,11 +6,13 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import toy.random_meal.member.controller.dto.DuplicatedUserIdResponse;
 import toy.random_meal.member.entity.Member;
 import toy.random_meal.member.entity.UserId;
 
 @SpringBootTest
+@Transactional
 class MemberServiceImplTest {
 
     @Autowired
@@ -31,7 +33,7 @@ class MemberServiceImplTest {
         DuplicatedUserIdResponse response = memberService.checkDuplicatedUserId(UserId.of("testtesttest"));
 
         //then
-        assertThat(response.isDuplicatedUserId()).isEqualTo(true);
+        assertThat(response.isDuplicatedUserId()).isTrue();
 
     }
     @Test
@@ -48,7 +50,7 @@ class MemberServiceImplTest {
         DuplicatedUserIdResponse response = memberService.checkDuplicatedUserId(UserId.of("testtest"));
 
         //then
-        assertThat(response.isDuplicatedUserId()).isEqualTo(false);
+        assertThat(response.isDuplicatedUserId()).isFalse();
 
     }
 
