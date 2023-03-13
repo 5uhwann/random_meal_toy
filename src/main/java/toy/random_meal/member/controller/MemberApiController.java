@@ -25,7 +25,7 @@ public class MemberApiController {
     public void signUp(@RequestBody MemberInfo memberInfo) {
         Member member = Member.builder()
                 .name(memberInfo.getName())
-                .userId(UserId.of(memberInfo.getUserId()))
+                .userId(UserId.from(memberInfo.getUserId()))
                 .password(memberInfo.getPassword()).build();
 
         memberService.joinMember(member);

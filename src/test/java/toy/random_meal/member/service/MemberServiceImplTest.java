@@ -24,13 +24,13 @@ class MemberServiceImplTest {
         //given
         Member memberA = Member.builder()
                 .name("5uhwann")
-                .userId(UserId.of("testtest"))
+                .userId(UserId.from("testtest"))
                 .password("1234").build();
 
         memberService.joinMember(memberA);
 
         //when
-        DuplicatedUserIdResponse response = memberService.checkDuplicatedUserId(UserId.of("testtesttest"));
+        DuplicatedUserIdResponse response = memberService.checkDuplicatedUserId(UserId.from("testtesttest"));
 
         //then
         assertThat(response.isDuplicatedUserId()).isTrue();
@@ -41,13 +41,13 @@ class MemberServiceImplTest {
         //given
         Member memberA = Member.builder()
                 .name("5uhwann")
-                .userId(UserId.of("testtest"))
+                .userId(UserId.from("testtest"))
                 .password("1234").build();
 
         memberService.joinMember(memberA);
 
         //when
-        DuplicatedUserIdResponse response = memberService.checkDuplicatedUserId(UserId.of("testtest"));
+        DuplicatedUserIdResponse response = memberService.checkDuplicatedUserId(UserId.from("testtest"));
 
         //then
         assertThat(response.isDuplicatedUserId()).isFalse();

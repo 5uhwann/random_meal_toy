@@ -12,7 +12,7 @@ class UserIdTest {
         String userId = "testtest";
 
         //when
-        UserId createdUserId = UserId.of(userId);
+        UserId createdUserId = UserId.from(userId);
 
         //then
         assertThat(createdUserId.getUserId()).isEqualTo(userId);
@@ -25,7 +25,7 @@ class UserIdTest {
         String userId = "test";
 
         //then
-        assertThatThrownBy(() -> UserId.of(userId)).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> UserId.from(userId)).isInstanceOf(IllegalStateException.class);
     }
 
 }

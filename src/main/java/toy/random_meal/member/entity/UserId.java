@@ -21,7 +21,7 @@ public class UserId {
         this.userId = userId;
     }
 
-    public static UserId of(String id) {
+    public static UserId from(String id) {
         validateId(id);
         return new UserId(id);
     }
