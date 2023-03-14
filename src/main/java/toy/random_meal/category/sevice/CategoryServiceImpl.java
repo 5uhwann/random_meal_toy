@@ -29,4 +29,9 @@ public class CategoryServiceImpl implements CategoryService{
                  .map(CategoryDto::of)
                  .collect(Collectors.toList());
     }
+
+    @Override
+    public void delete(Category category) {
+        categoryRepository.delete(category);
+    }
 }

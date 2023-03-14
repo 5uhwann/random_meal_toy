@@ -10,4 +10,6 @@ public interface CategoryService {
 
     List<CategoryDto> findByMemberId(Long memberId);
 
+    void delete(Category category);
+
 }
