@@ -31,6 +31,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
+    @Transactional
     public void delete(Category category) {
         categoryRepository.delete(category);
     }
