@@ -6,7 +6,7 @@ import toy.random_meal.category.entity.Category;
 
 public interface CategoryService {
 
-    Long save(Category category);
+    Long createCategory(Category category);
 
     List<CategoryDto> findByMemberId(Long memberId);
 

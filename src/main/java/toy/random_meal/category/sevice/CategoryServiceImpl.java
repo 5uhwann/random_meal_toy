@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     @Transactional
-    public Long save(Category category) {
+    public Long createCategory(Category category) {
         categoryRepository.save(category);
         return category.getId();
     }
