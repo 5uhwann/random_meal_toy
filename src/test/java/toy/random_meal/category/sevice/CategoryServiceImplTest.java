@@ -47,7 +47,9 @@ class CategoryServiceImplTest {
     }
 
     private void createCategory(Member member, String name) {
-        Category categoryA = Category.of(member, name);
+        Category categoryA = Category.builder()
+                .member(member)
+                .name(name).build();
         categoryService.createCategory(categoryA);
     }
 

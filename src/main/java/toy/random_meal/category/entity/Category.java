@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import toy.random_meal.common.entity.BaseEntity;
@@ -31,12 +32,9 @@ public class Category extends BaseEntity {
     @Column(name = "category_name")
     private String name;
 
-    private Category(Member member, String name) {
+    @Builder
+    public Category (Member member, String name) {
         this.member = member;
         this.name = name;
-    }
-
-    public static Category of(Member member, String categoryName) {
-        return new Category(member,categoryName);
     }
 }
