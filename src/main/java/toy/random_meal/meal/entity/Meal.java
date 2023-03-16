@@ -8,13 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import toy.random_meal.category.entity.Category;
 import toy.random_meal.common.entity.BaseEntity;
 import toy.random_meal.mealinventory.entity.MealInventory;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Meal extends BaseEntity {
 
     @Id
@@ -37,4 +41,13 @@ public class Meal extends BaseEntity {
 
     private int selectedCount;
 
+
+    @Builder
+    public Meal(MealInventory mealInventory, Category category, String name, int price) {
+        this.mealInventory = mealInventory;
+        this.category = category;
+        this.name = name;
+        this.price = price;
+        this.selectedCount = 0;
+    }
 }
