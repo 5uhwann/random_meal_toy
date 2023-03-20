@@ -53,10 +53,10 @@ class MealInventoryServiceImplTest {
         String newName = "newTestInventory";
 
         //when
-        mealInventoryService.updateName(mealInventory, newName);
+        MealInventoryDto mealInventoryDto = mealInventoryService.updateName(mealInventory, newName);
 
         //then
-        assertThat(mealInventory.getName()).isEqualTo(newName);
+        assertThat(mealInventoryDto.getName()).isEqualTo(newName);
     }
 
     private static MealInventory createMealInventory(Member member, String inventoryName) {

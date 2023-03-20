@@ -33,7 +33,8 @@ public class MealInventoryServiceImpl implements MealInventoryService{
 
     @Override
     @Transactional
-    public void updateName(MealInventory mealInventory, String name) {
+    public MealInventoryDto updateName(MealInventory mealInventory, String name) {
         mealInventory.changeName(name);
+        return MealInventoryDto.from(mealInventory);
     }
 }
