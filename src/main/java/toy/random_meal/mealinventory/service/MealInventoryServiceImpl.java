@@ -30,4 +30,10 @@ public class MealInventoryServiceImpl implements MealInventoryService{
                 .map(MealInventoryDto::from)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public void updateName(MealInventory mealInventory, String name) {
+        mealInventory.changeName(name);
+    }
 }

@@ -41,4 +41,8 @@ public class MealInventory extends BaseEntity {
         this.numberOfUse = 0;
     }
 
+    public void changeName(String name) {
+        this.name = name;
+    }
+
 }
