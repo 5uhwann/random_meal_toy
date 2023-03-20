@@ -11,6 +11,6 @@ public interface MealInventoryService {
 
     List<MealInventoryDto> findAllByMember(Member member);
 
-    MealInventoryDto updateName(MealInventory mealInventory, String name);
+    MealInventoryDto updateName(MealInventory mealInventory, String beforeName, String updateName);
 
 }

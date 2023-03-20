@@ -33,8 +33,15 @@ public class MealInventoryServiceImpl implements MealInventoryService{
 
     @Override
     @Transactional
-    public MealInventoryDto updateName(MealInventory mealInventory, String name) {
-        mealInventory.changeName(name);
+    public MealInventoryDto updateName(MealInventory mealInventory, String beforeName, String updateName) {
+        validateUpdateName(beforeName, updateName);
+        mealInventory.changeName(updateName);
         return MealInventoryDto.from(mealInventory);
+    }
+
+    private void validateUpdateName(String beforeName, String updateName) {
+        if (beforeName.equals(updateName)) {
+            throw new IllegalArgumentException("이전과 다른 이름으로 수정해야 합니다.");
+        }
     }
 }
