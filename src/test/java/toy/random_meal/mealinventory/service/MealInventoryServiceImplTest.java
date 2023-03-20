@@ -41,6 +41,24 @@ class MealInventoryServiceImplTest {
         assertThat(foundMealInventory.isEmpty()).isFalse();
     }
 
+    @Test
+    void 음식목록_이름변경() {
+        //given
+        Member member = createMember();
+        memberService.joinMember(member);
+
+        MealInventory mealInventory = createMealInventory(member, "testInventory");
+        mealInventoryService.createMealInventory(mealInventory);
+
+        String newName = "newTestInventory";
+
+        //when
+        mealInventoryService.updateName(mealInventory, newName);
+
+        //then
+        assertThat(mealInventory.getName()).isEqualTo(newName);
+    }
+
     private static MealInventory createMealInventory(Member member, String inventoryName) {
         return MealInventory.builder()
                 .member(member)
