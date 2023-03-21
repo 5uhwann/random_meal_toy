@@ -9,6 +9,7 @@ import toy.random_meal.meal.controller.dto.MealDto;
 import toy.random_meal.meal.entity.Meal;
 import toy.random_meal.meal.repository.MealRepository;
 import toy.random_meal.mealinventory.entity.MealInventory;
+import toy.random_meal.member.entity.Member;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +36,13 @@ public class MealServiceImpl implements MealService{
     @Transactional
     public void delete(Meal meal) {
         mealRepository.delete(meal);
+    }
+
+    @Override
+    public List<MealDto> findAllByMember(Member member) {
+        return mealRepository.findAll(member).stream()
+                .map(MealDto::from)
+                .collect(Collectors.toList());
     }
 
 }
