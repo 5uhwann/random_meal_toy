@@ -29,7 +29,7 @@ class MealServiceImplTest {
     private MealService mealService;
 
     @Test
-    void 음식조회() {
+    void 음식조회_음식목록() {
         //given
         Member member = createMember();
         memberService.joinMember(member);
@@ -49,6 +49,32 @@ class MealServiceImplTest {
 
         //when
         List<MealDto> foundMeals = mealService.findAllByMealInventory(inventory);
+
+        //then
+        assertThat(foundMeals.isEmpty()).isFalse();
+    }
+
+    @Test
+    void 음식조회_회원() {
+        //given
+        Member member = createMember();
+        memberService.joinMember(member);
+
+        MealInventory inventory = createMealInventory(member);
+        mealInventoryService.createMealInventory(inventory);
+
+        Category categoryA = createCategory(member, "categoryA");
+        Category categoryB = createCategory(member, "categoryB");
+        categoryService.createCategory(categoryA);
+        categoryService.createCategory(categoryB);
+
+        Meal mealA = createMeal(inventory, categoryA, "mealA", 10000);
+        Meal mealB = createMeal(inventory, categoryA, "mealB", 15000);
+        mealService.createMeal(mealA);
+        mealService.createMeal(mealB);
+
+        //when
+        List<MealDto> foundMeals = mealService.findAllByMember(member);
 
         //then
         assertThat(foundMeals.isEmpty()).isFalse();
